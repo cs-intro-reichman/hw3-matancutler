@@ -98,39 +98,40 @@ public class Algebra {
 
 	// Returns x1^x2
     public static int pow(int x1, int x2) {
-		boolean isBaseNegative = (x1 < 0);
-        int base = x1;
-		int result = base;
-        int i = 1;
-        if (x2 == 0)
+    if (x2 == 0) 
+	{
+        return 1;
+    }
+    if (x2 == 1) 
+	{
+        return x1;
+    }
+    if (x1 == 0) 
+	{
+        return 0;
+    }
+    boolean isBaseNegative = (x1 < 0);
+    int base = x1;
+    if (isBaseNegative) 
+	{
+        base = minus(0, x1); 
+    }
+    int result = base;
+    int i = 1; 
+    while (i < x2) 
+	{
+        result = times(result, base);
+        i = plus(i, 1);
+    }
+    if (isBaseNegative) 
+	{
+        int remainder = mod(x2, 2);
+        if (remainder != 0) 
 		{
-            return 1;
+            return minus(0, result); 
         }
-        if (x2 == 1) 
-		{
-            return x1;
-        }
-        if (x1 == 0) 
-		{
-            return 0;
-        }
-        if (isBaseNegative) 
-		{
-            base = minus(0, x1); 
-        }
-        while (i < x2) {
-            result = times(result, base);
-            i = plus(i, 1);
-        }
-        if (isBaseNegative) {
-            int two = plus(1, 1); 
-            int remainder = mod(x2, two);
-            if (remainder != 0)
-			{ 
-                return minus(0, result);
-            }
-        }
-        return result;
+    }
+    return result;
     }
 
 	// Returns the integer part of x1 / x2 
