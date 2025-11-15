@@ -30,25 +30,28 @@ public class Anagram {
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
+		String s2 = "";
 		boolean exist = false;
 		if(str1.length() != str2.length())
 			return false;
 		for (int i = 0; i < str1.length(); i ++)
 		{
-			for (int j = 0; j < str1.length(); j++)
+			for (int j = 0; j < str1.length() && exist == false; j++)
 			{
-				if(str1.charAt(i) == str2.charAt(j));
+				if(str1.charAt(i) == str2.charAt(j))
 				{
+					s2 = s2 + str1.charAt(i);
 					exist = true;
-					str1 = str1.substring(1, str1.length());
-					str2 = str2.substring(0, i) + str2.substring(i+1, str2.length());
 				}
 			}
 			if(!exist)
 				return false;
 			exist = false;
 		}
-		return true;
+		if(s2.equals(str1))
+			return true;
+		else
+			return false;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
